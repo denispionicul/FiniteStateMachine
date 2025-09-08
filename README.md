@@ -6,7 +6,7 @@ Was mainly done because I wanted to port RobloxStateMachine to RobloxTS.
 
 ## StateMachine
 
-### `constructor(InitialState, States MustCallHeartbeatManually, Data)`
+### `constructor(InitialState, States, MustCallHeartbeatManually, Data)`
 
 #### Parameters
 
