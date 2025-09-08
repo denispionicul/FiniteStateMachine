@@ -53,6 +53,13 @@ Used to change the state of the machine.
 #### Returns
 - State - The previous `State` that used to be on.
 
+
+### `GetStates()`
+
+#### Returns
+- States - An array of states that the state machine has.
+
+
 ### `ExecuteHeartbeatEvent(Delta)`
 A method that when called, calls the OnHeartbeat method of both the current state and the current state's transitions.
 
@@ -129,7 +136,7 @@ const Machine = new StateMachine("Roaming", [Roaming], false, NPC);
 Do note that the machine starts immediately after it's constructed.
 
 ## Transitions
-Transitions can help with transitionin states. They serve as a little bonus on top of states.
+Transitions can help with transitioning states. They serve as a little bonus on top of states.
 
 Again, let's say we have a file named RunningTransition.
 ```ts
