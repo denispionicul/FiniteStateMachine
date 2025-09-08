@@ -16,10 +16,10 @@ Was mainly done because I wanted to port RobloxStateMachine to RobloxTS.
 - Data - Can be anything you wish. This data will be visible by all states and transitions. Usually an object.
 
 ```ts
-import { StateMachine, State } from "@rbxts/finite-state-machine";
+import { StateMachine, State, StateConstructor } from "@rbxts/finite-state-machine";
 
 function RequireStates(Path: Folder) {
-    return Path.GetChildren().map(Child => require(Child as ModuleScript)) as State[];
+    return Path.GetChildren().map(Child => require(Child as ModuleScript) as StateConstructor);
 }
 
 const NPC = {

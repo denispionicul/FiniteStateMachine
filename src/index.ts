@@ -1,5 +1,5 @@
 import StateMachine from "./StateMachine";
-import State from "./State";
-import Transition from "./Transition";
+import State, { StateConstructor } from "./State";
+import Transition, { TransitionConstructor } from "./Transition";
 
-export { StateMachine, State, Transition };
+export { StateMachine, State, Transition, StateConstructor, TransitionConstructor };
