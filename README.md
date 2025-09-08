@@ -71,6 +71,14 @@ A method that when called, calls the OnHeartbeat method of both the current stat
 Stops the machine from running.
 
 
+### `StateChanged`
+An event that fires whenever the state machine changes states
+```ts
+StateMachine.StateChanged.Connect((NewState, OldState) => {
+    // ...
+})
+```
+
 ### `StateMachine.ExecuteHeartbeatEvents(Delta, OnlyManualStateMachines)`
 A **Static** method that can be called to execute the OnHeartbeat methods on ALL the active StateMachines.
 Useful for when you want to call the OnHeartbeat events at different times/with different DeltaTime or use some other event like RenderStepped.
@@ -79,7 +87,7 @@ Useful for when you want to call the OnHeartbeat events at different times/with 
 
 - Delta - The delta time
 
-- OnlyManualStateMachines - If true, will only call the OnHeartbeat events only on State Machines that have MustCallHeartbeatManually to true.
+- OnlyManualStateMachines - If true, will call the OnHeartbeat events only on State Machines that have MustCallHeartbeatManually to true. Otherwise only the ones who have it to false.
 
 
 ## Creating States
@@ -182,3 +190,7 @@ class Roaming extends State<NPCType> {
     Transitions = [RunningTransition]
 }
 ```
+
+## Final notes
+States and transitions can inherit from other states/transitions.
+States and Transitions have most of the methods that `StateMachine` has.

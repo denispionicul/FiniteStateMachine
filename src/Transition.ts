@@ -13,9 +13,17 @@ export default abstract class Transition<T = unknown | undefined> {
 		this.State.ChangeState(State as StateConstructor); // save me
 	}
 
+  public GetCurrentState() {
+    return this.State.GetCurrentState();
+  }
+
+  public GetPreviousState() {
+    return this.State.GetPreviousState();
+  }
+
 	// Meant to be overriden
 
-/**
+    /**
      * Called when the state machine is constructed.
      */
     public OnInit(Data: T) {}

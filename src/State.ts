@@ -22,6 +22,10 @@ export default abstract class State<T = unknown> {
         return this.StateMachine.GetCurrentState();
     }
 
+    public GetPreviousState() {
+        return this.StateMachine.GetPreviousState();
+    }
+
     // Methods meant to be overriden
 
     /**

@@ -21,11 +21,11 @@ export default class StateMachine<Data = unknown> {
 
 	/**
 		* Manually calls OnHeartbeat on EVERY state machine
-		@param [OnlyManualStateMachines=false] If true, will call OnHeartbeat ONLY on state machines that have MustCallHeartbeatManually true.
+		@param [OnlyManualStateMachines=true] If true, will call OnHeartbeat ONLY on state machines that have MustCallHeartbeatManually true. Otherwise only the ones that don't.
 	*/
-	public static ExecuteHeartbeatEvents(DeltaTime: number, OnlyManualStateMachines: boolean = false) {
+	public static ExecuteHeartbeatEvents(DeltaTime: number, OnlyManualStateMachines: boolean = true) {
 		for (const StateMachine of ActiveStateMachines) {
-			if (OnlyManualStateMachines && !StateMachine.MustCallHeartbeatManually) continue;
+			if ((OnlyManualStateMachines && !StateMachine.MustCallHeartbeatManually) || (!OnlyManualStateMachines && StateMachine.MustCallHeartbeatManually)) continue;
 			StateMachine.ExecuteHeartbeatEvent(DeltaTime);
 		}
 	}
@@ -73,7 +73,7 @@ export default class StateMachine<Data = unknown> {
 
 		if (HeartbeatConnection === undefined && !MustCallHeartbeatManually)
 			HeartbeatConnection = RunService.Heartbeat.Connect((Delta) => {
-				StateMachine.ExecuteHeartbeatEvents(Delta, true);
+				StateMachine.ExecuteHeartbeatEvents(Delta, false);
 			});
 	}
 
