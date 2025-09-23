@@ -1,4 +1,3 @@
-(package will be released once I test this more)
 # RobloxStateMachine
 
 A simple finite state machine library very much inspired by [prooheckcp's RobloxStateMachine](https://github.com/prooheckcp/RobloxStateMachine). 
