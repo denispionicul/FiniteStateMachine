@@ -120,6 +120,8 @@ export = class Roaming extends State<NPCType> {
 
     OnHeartbeat(Data: NPCType, Delta: number) {
         // Called every heartbeat or when StateMachine.ExecuteHeartbeatEvent is called while this state is currently on.
+
+        if (Data.Anger > 100) this.ChangeState("Angry");
     }
 
     OnDestroy(Data: NPCType) {
@@ -129,7 +131,7 @@ export = class Roaming extends State<NPCType> {
     // A method that is called everytime the state machine tries to change states. If it returns false, the state machine won't change the current state.
     CanChangeState(Target: State<NPCType>) {
         // In this scenario, if the machine wants to switch to the Running state while it's in the Roaming state (this state), don't allow it to switch.
-        return tostring(Target) !== "Running"
+        return Target.Name !== "Running"
     }
 }
 ```

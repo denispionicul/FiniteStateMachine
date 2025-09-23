@@ -1,64 +1,66 @@
 import StateMachine from "./StateMachine";
 import Transition, { TransitionConstructor } from "./Transition";
 
-export type StateConstructor = new (...args: [StateMachine: StateMachine]) => State
+export type StateConstructor = new (...args: [StateMachine: StateMachine]) => State;
 
 export default abstract class State<T = unknown> {
-    public Data;
+	public Data;
 
-    public Transitions?: TransitionConstructor[];
+	public Transitions?: TransitionConstructor[];
 
-    public ActiveTransitions: Transition<T>[] = [];
+	public ActiveTransitions: Transition<T>[] = [];
 
-    constructor (private StateMachine: StateMachine) {
-        this.Data = StateMachine.Data as T;
-    }
+	public readonly Name = tostring(getmetatable(this));
 
-    public ChangeState(State: string | State | StateConstructor) {
-        this.StateMachine.ChangeState(State as StateConstructor); // I'm sorry
-    }
+	constructor(private StateMachine: StateMachine) {
+		this.Data = StateMachine.Data as T;
+	}
 
-    public GetCurrentState() {
-        return this.StateMachine.GetCurrentState();
-    }
+	public ChangeState(State: string | State | StateConstructor) {
+		this.StateMachine.ChangeState(State as StateConstructor); // I'm sorry
+	}
 
-    public GetPreviousState() {
-        return this.StateMachine.GetPreviousState();
-    }
+	public GetCurrentState() {
+		return this.StateMachine.GetCurrentState();
+	}
 
-    // Methods meant to be overriden
+	public GetPreviousState() {
+		return this.StateMachine.GetPreviousState();
+	}
 
-    /**
-     * A method that controls whether the state machine is allowed to switch off this state.
-     * @param Target The state that the state machine wants to switch to.
-     * @returns A boolean that when true, will allow the state to be changed
-     */
-    public CanChangeState(Target: State<T>) {
-        return true;
-    }
+	// Methods meant to be overriden
 
-    /**
-     * Called when the state machine is constructed.
-     */
-    public OnInit(Data: T) {}
+	/**
+	 * A method that controls whether the state machine is allowed to switch off this state.
+	 * @param Target The state that the state machine wants to switch to.
+	 * @returns A boolean that when true, will allow the state to be changed
+	 */
+	public CanChangeState(Target: State<T>) {
+		return true;
+	}
 
-    /**
-     * Called when the state machine switches to this state.
-     */
-    public OnEnter(Data: T) {}
+	/**
+	 * Called when the state machine is constructed.
+	 */
+	public OnInit(Data: T) {}
 
-    /**
-     * Called when the state machine switches off this state.
-     */
-    public OnLeave(Data: T) {}
+	/**
+	 * Called when the state machine switches to this state.
+	 */
+	public OnEnter(Data: T) {}
 
-    /**
-     * Called every heartbeat or when {@link StateMachine#ExecuteHeartbeatEvent} is called.
-     */
-    public OnHeartbeat(Data: T, DeltaTime: number) {}
+	/**
+	 * Called when the state machine switches off this state.
+	 */
+	public OnLeave(Data: T) {}
 
-    /**
-     * Called when the state machine is destroyed.
-     */
-    public OnDestroy(Data: T) {}
+	/**
+	 * Called every heartbeat or when {@link StateMachine#ExecuteHeartbeatEvent} is called.
+	 */
+	public OnHeartbeat(Data: T, DeltaTime: number) {}
+
+	/**
+	 * Called when the state machine is destroyed.
+	 */
+	public OnDestroy(Data: T) {}
 }
