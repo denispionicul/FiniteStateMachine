@@ -1,5 +1,5 @@
 (package will be released once I test this more)
-# FiniteStateMachine
+# RobloxStateMachine
 
 A simple finite state machine library very much inspired by [prooheckcp's RobloxStateMachine](https://github.com/prooheckcp/RobloxStateMachine). 
 
@@ -95,7 +95,7 @@ Useful for when you want to call the OnHeartbeat events at different times/with 
 
 Let's say we have a state named Roaming.
 ```ts
-import { State } from "@rbxts/finite-state-machine";
+import { State } from "@rbxts/roblox-state-machine";
 import { NPCType } from "./Types";
 
 // The Data parameter is the 4th parameter of the state machine constructor, and the type of data can be specified in the State<Data> type.
@@ -137,7 +137,7 @@ export = class Roaming extends State<NPCType> {
 ```
 And now we can create a state machine that uses this state.
 ```ts
-import { StateMachine } from "@rbxts/finite-state-machine";
+import { StateMachine } from "@rbxts/roblox-state-machine";
 import Roaming from "somewhere";
 
 const NPC = ...
@@ -151,7 +151,7 @@ Transitions can help with transitioning states. They serve as a little bonus on 
 
 Again, let's say we have a file named RunningTransition.
 ```ts
-import { Transition } from "@rbxts/finite-state-machine";
+import { Transition } from "@rbxts/roblox-state-machine";
 import { NPCType } from "./Types";
 
 export = class RunningTransition extends Transition<NPCType> {
