@@ -100,7 +100,7 @@ export default class StateMachine<Data = unknown> {
 	}
 
 	public ChangeState(State: string | State | StateConstructor) {
-		const ChangingState = typeIs(State, "string") ? this.StateMap.get(State) : this.StateMap.get(tostring(State));
+		const ChangingState = typeIs(State, "string") ? this.StateMap.get(State) : (this.StateMap.get(tostring(State)) ?? this.StateMap.get((State as State).Name));
 
 		assert(
 			ChangingState,
